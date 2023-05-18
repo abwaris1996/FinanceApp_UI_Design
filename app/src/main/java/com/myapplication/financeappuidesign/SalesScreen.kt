@@ -21,7 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.myapplication.financeappuidesign.ui.theme.*
@@ -47,6 +49,7 @@ val year2020sales= mutableListOf(
     MonthlySaledData("Dec",8)
 
 )
+
 
 @Composable()
     fun SalesScreen(){
@@ -106,6 +109,34 @@ val year2020sales= mutableListOf(
                 }
 
             }
+
+            Text(text="Sales Revenue",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 14.dp),
+                     fontSize = 20.sp,
+                     color=Color.White,
+                    fontFamily = FontFamily(Font(R.font.ubuntu))
+            )
+
+            Row (
+                modifier = Modifier.fillMaxWidth()
+                    ){
+                
+                Column(modifier = Modifier.weight(1f)){
+                    InfoCard(160.dp)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    InfoCard(260.dp)
+
+                }
+                Spacer(modifier = Modifier.width(10.dp))
+                Column(modifier = Modifier.weight(1f)){
+                    InfoCard(160.dp)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    InfoCard(260.dp)
+                }
+
+            }
         }
 
     }
@@ -138,14 +169,13 @@ fun SingleBar(
                     )
                 )
                 .background(
-                    if(year2020sales.indexOf(monthlySaledData)%2==0){
+                    if (year2020sales.indexOf(monthlySaledData) % 2 == 0) {
                         CustomLightOrange
-                    }
-                else CustomCyan
+                    } else CustomCyan
                 )
                 .width(40.dp)
                 .height(
-                    (200*monthlySaledData.salesInThousand/largestSalesValue).dp
+                    (200 * monthlySaledData.salesInThousand / largestSalesValue).dp
                 )
               
 
@@ -159,6 +189,43 @@ fun SingleBar(
             fontSize = 12.sp
         )
 
+    }
+}
+@Composable
+
+fun InfoCard(
+    cardHeight: Dp){
+
+    Box(
+    modifier = Modifier.clip(RoundedCornerShape(30.dp))
+        .fillMaxWidth()
+        .height(cardHeight)
+        .background(color = Color.White.copy(alpha = 0.1f)),
+        contentAlignment = Alignment.Center
+
+    ){
+    
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Icon(painter = painterResource(id = R.drawable.ic_sales), contentDescription ="",
+            modifier = Modifier.size(25.dp),
+            tint=Color.White)
+            Text("23K",
+            fontFamily = FontFamily(Font(R.font.ubuntu)),
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Text("Sales",
+                fontFamily = FontFamily(Font(R.font.ubuntu)),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            
+        }
     }
 }
 
